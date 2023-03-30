@@ -1,0 +1,23 @@
+import sqlite3
+
+# Connect to database or create if it doesn't exist
+conn = sqlite3.connect('customer.db')
+
+# Create a cursor object to execute SQL commands
+cursor = conn.cursor()
+
+# Create a customers table with fields for name, email, phone, and address
+cursor.execute('''CREATE TABLE customers
+                (id INTEGER PRIMARY KEY,
+                 name TEXT,
+                 email TEXT,
+                 phone TEXT,
+                 address TEXT)''')
+
+# Insert sample customer data into the customers table
+cursor.execute("INSERT INTO customers (name, email, phone, address) VALUES ('John Smith', 'john@example.com', '555-1234', '123 Main St')")
+cursor.execute("INSERT INTO customers (name, email, phone, address) VALUES ('Jane Doe', 'jane@example.com', '555-5678', '456 Elm St')")
+
+# Commit changes to database and close connection
+conn.commit()
+conn.close()
